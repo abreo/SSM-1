@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="Json">
+<title>Redis</title>
+<link href="bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<style type="text/css">
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+	padding-top: 3.5rem;
+}
+
+h1 {
+	margin-bottom: 20px;
+	padding-bottom: 9px;
+	border-bottom: 1px solid #eee;
+}
+
+.sidebar {
+	position: fixed;
+	top: 51px;
+	bottom: 0;
+	left: 0;
+	z-index: 1000;
+	padding: 20px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	/* Scrollable contents if viewport is shorter than content. */
+	border-right: 1px solid #eee;
+}
+
+.sidebar {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.sidebar .nav {
+	margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+	width: 100%;
+}
+
+.sidebar .nav-item+.nav-item {
+	margin-left: 0;
+}
+
+.sidebar .nav-link {
+	border-radius: 0;
+}
+
+.placeholders {
+	padding-bottom: 3rem;
+}
+
+.placeholder img {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+}
+
+.redback {
+	background: #CC0000
+}
+
+.navtext {
+	font-size: 22px
+}
+
+.myself_main {
+	margin-top: 5px;
+	margin-left: 17.7%;
+}
+
+.list_head_image {
+	display: inline-block;
+	vertical-align: middle;
+	width: 40px;
+	height: 40px;
+	border-radius: 100%;
+	border: solid 1px #dae4ea;
+	margin-right: 10px;
+}
+
+.list_head_num {
+	background: #b8b8b8;
+	border-radius: 100%;
+	width: 20px;
+	height: 20px;
+}
+
+.right_box {
+	padding-left: 30px
+}
+
+.right_box_plus {
+	padding-right: 90px
+}
+
+.list_li {
+	margin-top: 20px
+}
+
+.record_text {
+	font-weight: normal;
+	color: #333;
+	vertical-align: middle;
+}
+.emm_text {
+	opacity: 0.5;
+	filter: alpha(opacity = 50);
+	display: inline-block;
+	border-radius: 50%;
+	background: #b8b8b8;
+	width: 25px;
+	height: 25px;
+	font-size: 16px;
+	color: black;
+	text-align: center;
+	line-height: 25px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<!-- navbar-inverse -->
+		<div class="container-fluid">
+			<div class="navbar-header" style="padding-left: 4%">
+				<a class="navbar-brand" href="#"> <img alt="Brand"
+					src="image/redis-white.png">
+				</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid page_body" >
+		<div class="row">
+			<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-faded sidebar">
+				<!--  col-md-2 d-none d-sm-block bg-faded sidebar -->
+				<ul class="nav nav-pills flex-column">
+					<li class="nav-item"><a class="nav-link active" href="#">技术博客</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">配置文件</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">客户端</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">命令</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">论坛</a></li>
+				</ul>
+				<ul class="nav nav-pills flex-column">
+					<li class="nav-item"><a class="nav-link" href="#"
+						id="redis_try_online">在线试用</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">新闻</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">书籍</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">学习笔记</a></li>
+				</ul>
+				<ul class="nav nav-pills flex-column">
+					<li class="nav-item"><a class="nav-link" href="#">下载</a></li>
+				</ul>
+			</nav>
+
+			<main
+				class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 myself_main"
+				role="main">
+			<div class="rankList clearfix" id="center">
+				<!--文章周排行-->
+				<div class="ranking ranking_min">
+					<h3 class="rank_t" style="padding-top: 2%">热门博客</h3>
+					<ul class="ranking_c">
+						<li class="list_li"><em class="emm_text">1.</em> <label
+							class="blog_pad"> <a href="#" class="right_box"> <img
+									src="image/head/leaf.png" class="list_head_image ">
+							</a> <a href="#" class="blog_a blog_a_top right_box">柏云鹏</a> <a
+								href="#" class="article_t right_box"
+								title="CSDN日报20170515 ——《 聊聊我对 WannaCry 产生的感慨》">
+									CSDN日报20170515 ——《 聊聊我对 WannaCry 产生的感慨》 </a> <span
+								class="blog_span right_box_plus"> <i
+									class="glyphicon glyphicon-eye-open"></i> <b
+									class="record_text">6854</b>
+							</span>
+						</label></li>
+						<li class="list_li"><em class="emm_text">2.</em> <label
+							class="blog_pad"> <a href="#" class="right_box"> <img
+									src="image/head/leaf.png" class="list_head_image ">
+							</a> <a href="#" class="blog_a blog_a_top right_box">泓洋</a> <a
+								href="#" class="article_t right_box"
+								title="Android 仿火萤视频桌面 神奇的LiveWallPaper"> Android 仿火萤视频桌面
+									神奇的LiveWallPaper </a> <span class="blog_span right_box_plus">
+									<i class="glyphicon glyphicon-eye-open"></i> <b
+									class="record_text">4956</b>
+							</span>
+						</label></li>
+
+						<li class="list_li"><em class="emm_text">2.</em> <label
+							class="blog_pad"> <a href="#" class="right_box"> <img
+									src="image/head/leaf.png" class="list_head_image ">
+							</a> <a href="#" class="blog_a blog_a_top right_box">泓洋</a> <a
+								href="#" class="article_t right_box"
+								title="Android 仿火萤视频桌面 神奇的LiveWallPaper"> Android 仿火萤视频桌面
+									神奇的LiveWallPaper </a> <span class="blog_span right_box_plus">
+									<i class="glyphicon glyphicon-eye-open"></i> <b
+									class="record_text">4956</b>
+							</span>
+						</label></li>
+
+						<li class="list_li"><em class="emm_text">2.</em> <label
+							class="blog_pad"> <a href="#" class="right_box"> <img
+									src="image/head/leaf.png" class="list_head_image ">
+							</a> <a href="#" class="blog_a blog_a_top right_box">泓洋</a> <a
+								href="#" class="article_t right_box"
+								title="Android 仿火萤视频桌面 神奇的LiveWallPaper"> Android 仿火萤视频桌面
+									神奇的LiveWallPaper </a> <span class="blog_span right_box_plus">
+									<i class="glyphicon glyphicon-eye-open"></i> <b
+									class="record_text">4956</b>
+							</span>
+						</label></li>
+
+						<li class="list_li"><em class="emm_text">2.</em> <label
+							class="blog_pad"> <a href="#" class="right_box"> <img
+									src="image/head/leaf.png" class="list_head_image ">
+							</a> <a href="#" class="blog_a blog_a_top right_box">泓洋</a> <a
+								href="#" class="article_t right_box"
+								title="Android 仿火萤视频桌面 神奇的LiveWallPaper"> Android 仿火萤视频桌面
+									神奇的LiveWallPaper </a> <span class="blog_span right_box_plus">
+									<i class="glyphicon glyphicon-eye-open"></i> <b
+									class="record_text">4956</b>
+							</span>
+						</label></li>
+
+						<li class="list_li"><em class="emm_text">2.</em> <label
+							class="blog_pad"> <a href="#" class="right_box"> <img
+									src="image/head/leaf.png" class="list_head_image ">
+							</a> <a href="#" class="blog_a blog_a_top right_box">泓洋</a> <a
+								href="#" class="article_t right_box"
+								title="Android 仿火萤视频桌面 神奇的LiveWallPaper"> Android 仿火萤视频桌面
+									神奇的LiveWallPaper </a> <span class="blog_span right_box_plus">
+									<i class="glyphicon glyphicon-eye-open"></i> <b
+									class="record_text">4956</b>
+							</span>
+						</label></li>
+
+						<li class="list_li"><em class="emm_text">2.</em> <label
+							class="blog_pad"> <a href="#" class="right_box"> <img
+									src="image/head/leaf.png" class="list_head_image ">
+							</a> <a href="#" class="blog_a blog_a_top right_box">泓洋</a> <a
+								href="#" class="article_t right_box"
+								title="Android 仿火萤视频桌面 神奇的LiveWallPaper"> Android 仿火萤视频桌面
+									神奇的LiveWallPaper </a> <span class="blog_span right_box_plus">
+									<i class="glyphicon glyphicon-eye-open"></i> <b
+									class="record_text">4956</b>
+							</span>
+						</label></li>
+
+						<li class="list_li"><em class="emm_text">2.</em> <label
+							class="blog_pad"> <a href="#" class="right_box"> <img
+									src="image/head/leaf.png" class="list_head_image ">
+							</a> <a href="#" class="blog_a blog_a_top right_box">泓洋</a> <a
+								href="#" class="article_t right_box"
+								title="Android 仿火萤视频桌面 神奇的LiveWallPaper"> Android 仿火萤视频桌面
+									神奇的LiveWallPaper </a> <span class="blog_span right_box_plus">
+									<i class="glyphicon glyphicon-eye-open"></i> <b
+									class="record_text">4956</b>
+							</span>
+						</label></li>
+
+						<li class="list_li"><em class="emm_text">2.</em> <label
+							class="blog_pad"> <a href="#" class="right_box"> <img
+									src="image/head/leaf.png" class="list_head_image ">
+							</a> <a href="#" class="blog_a blog_a_top right_box">泓洋</a> <a
+								href="#" class="article_t right_box"
+								title="Android 仿火萤视频桌面 神奇的LiveWallPaper"> Android 仿火萤视频桌面
+									神奇的LiveWallPaper </a> <span class="blog_span right_box_plus">
+									<i class="glyphicon glyphicon-eye-open"></i> <b
+									class="record_text">4956</b>
+							</span>
+						</label></li>
+
+						<li class="list_li"><em class="emm_text">2.</em> <label
+							class="blog_pad"> <a href="#" class="right_box"> <img
+									src="image/head/leaf.png" class="list_head_image ">
+							</a> <a href="#" class="blog_a blog_a_top right_box">泓洋</a> <a
+								href="#" class="article_t right_box"
+								title="Android 仿火萤视频桌面 神奇的LiveWallPaper"> Android 仿火萤视频桌面
+									神奇的LiveWallPaper </a> <span class="blog_span right_box_plus">
+									<i class="glyphicon glyphicon-eye-open"></i> <b
+									class="record_text">4956</b>
+							</span>
+						</label></li>
+					</ul>
+				</div>
+			</div>
+			</main>
+		</div>
+		<div class="row footer-bottom" style="margin-top: 40px">
+		<ul class="list-inline text-center">
+			<li><a href="http://www.miibeian.gov.cn/" target="_blank">Hello
+					World</a></li>
+			<li>Redis爱好者</li>
+		</ul>
+	</div>
+	</div>
+
+	
+
+
+</body>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript"
+	src="bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$("#redis_try_online").click(function() {
+		var url = "public/redis/try.html";
+		var args = {
+				"time":new Date()
+				}
+		$.get(url,args,function(data) {
+			$("#center").html(data);
+			});
+	});
+	
+})
+</script>
+</html>
+
