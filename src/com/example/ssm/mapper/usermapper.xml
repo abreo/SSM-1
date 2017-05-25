@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ssm.inter.UserMapper">
+
+    <select id="getUserByUsernameAndPassword" resultMap="login_">
+        select * from user,user_role ,role,role_permission ,permission where
+        user.user_username = #{username} and
+        user.user_password = #{password} and
+        user.user_id = user_role.ur_user_id and
+        role.role_id = user_role.ur_role_id and
+        role.role_id = role_permission.role_id and
+        permission.permission_id = role_permission.permission_id
+    </select>
+    <resultMap type="com.example.ssm.entities.User" id="login_">
+        <id column="user_id" property="id"/>
+        <result column="user_name" property="name"/>
+        <result column="user_username" property="username"/>
+        <result column="user_email" property="email"/>
+        <collection property="roles" ofType="com.example.ssm.entities.Role">
+            <id column="role_id" property="id"/>
+            <result column="role_name" property="name"/>
+            <collection property="permissions" ofType="com.example.ssm.entities.Permission">
+                <id column="permission_id" property="id"/>
+                <result column="permission_url" property="url"/>
+            </collection>
+        </collection>
+    </resultMap>
+    
+    
+    <select id="getAllUsers" resultMap="users_">
+        select * from user limit #{pageNum} , #{pageCount}
+    </select>
+    
+    <resultMap type="com.example.ssm.entities.User" id="users_">
+        <id column="user_id" property="id"/>
+        <result column="user_name" property="name"/>
+        <result column="user_username" property="username"/>
+        <result column="user_password" property="password"/>
+        <result column="user_email" property="email"/>
+    </resultMap>
+    
+   
+    
+</mapper>

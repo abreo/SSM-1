@@ -4,13 +4,40 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ssm.inter.BookMapper">
 
+    <select id="getAllMyBooks" resultMap="book_">
+        select * from book ,user_book ,author ,press where 
+        user_book.user_id = #{id} and 
+        book.book_id = user_book.book_id and
+        author.author_id = book.book_author and
+        press.press_id = book.book_press
+    </select>
+    
 	<select id="getBookById" resultMap="book_">
-		SELECT * FROM book WHERE book_id = #{id}
+		SELECT * FROM book ,press ,author WHERE book_id = #{id} 
+        AND book_id = press_id AND book_id = author_id
 	</select>
 	
-	<resultMap id="book_" type="com.example.ssm.entities.Book"  >
-		<id column="book_id" property="id"/>
-		<result column="book_name" property="name"/>
-		<result column="book_isbn" property="isbn"/>
-	</resultMap>
+	<resultMap type="com.example.ssm.entities.Book" id="book_">
+        <id column="book_id" property="id"/>
+        <result column="book_name" property="name"/>
+        <result column="book_price" property="price"/>
+        <result column="book_isbn" property="isbn"/>
+        <result column="book_version" property="version"/>
+        <result column="publish_date" property="publishDate"/>
+        <result column="print_date" property="printDate"/>
+        <result column="book_msg" property="msg"/>
+        <result column="book_image_path" property="image"/>
+        <result column="press_id" property="press.id"/>
+        <result column="press_name" property="press.name"/>
+        <result column="press_msg" property="press.msg"/>
+        <association property="author" javaType="com.example.ssm.entities.Author">
+            <id column="author_id" property="id"/>
+            <result column="author_name" property="name"/>
+            <result column="author_msg" property="msg"/>
+            <association property="nation" 
+                select="com.example.ssm.dao.NationMapper.getNationById"
+                column="nation_id">
+            </association>
+        </association>
+      </resultMap>
 </mapper>
