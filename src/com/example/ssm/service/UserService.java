@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.ssm.dao.UserDao;
 import com.example.ssm.entities.User;
+import com.example.ssm.util.PageList;
 
 @Service
 public class UserService {
@@ -16,8 +17,13 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 	
-	public List<User> getAllUsers(int pageNum,int pageCount) {
-		return userDao.getAllUsers(pageNum,pageCount);
+	public PageList<User> getAllUsers(int pageNum,int pageCount) {
+		List<User> users =  userDao.getAllUsers((pageNum-1)*pageCount,pageCount);
+		PageList<User> pageList = new PageList<>();
+		pageList.setMaxCount(userDao.getUserCount());
+		pageList.setPageNum(pageNum);
+		pageList.setObjs(users);
+		return pageList;
 	}
 	
 	public User login(String username,String password) {

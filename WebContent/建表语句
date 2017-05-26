@@ -1,0 +1,60 @@
+建表语句：
+create table book(
+book_id integer primary key auto_increment ,
+book_name varchar(255) ,
+book_price float ,
+book_isbn varchar(255) ,
+book_press integer ,
+book_version int ,
+publish_date date ,
+print_date date ,
+book_msg varchar(255) ,
+book_image_path varchar(255) ,
+book_author integer ,
+constraint foreign key (book_author) references author(author_id) ,
+constraint foreign key (book_press) references press (press_id)
+)
+
+create table author(
+author_id integer primary key auto_increment ,
+author_name varchar(255) ,
+author_birth date ,
+author_msg varchar(255),
+author_nation integer,
+constraint foreign key(author_nation)  references nationality(nation_id) 
+)
+
+create table press(
+press_id integer primary key auto_increment ,
+press_name varchar(255) ,
+press_msg varchar(255)
+) 
+
+create table nationality(
+nation_id integer primary key auto_increment ,
+nation_name varchar(255)
+)
+
+create table permission(
+permission_id integer primary key auto_increment ,
+permission_name varchar(255) ,
+permission_url varchar(255)
+);
+create table role_permission(
+role_permission_id integer primary key auto_increment ,
+role_id integer ,
+permission_id integer,
+constraint foreign key(role_id) references role(role_id) ,
+constraint foreign key(permission_id) references permission(permission_id) 
+);
+create table role (
+role_id integer primary key auto_increment ,
+role_name varchar(255)
+);
+create table user_role(
+user_role_id integer primary key auto_increment ,
+ur_user_id integer ,
+ur_role_id integer ,
+constraint foreign key (ur_user_id) references user(user_id) ,
+constraint foreign key (ur_role_id) references role(role_id) 
+);

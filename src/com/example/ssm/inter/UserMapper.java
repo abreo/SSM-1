@@ -11,4 +11,6 @@ public interface UserMapper {
 	
 	public User getUserByUsernameAndPassword(Map<String,String> map);
 
+	public int getUserCount() ;
+	
 }

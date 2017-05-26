@@ -60,4 +60,18 @@ public class UserController {
 		ResponseUtil.write(response, SUCCESS);
 	}
 	
+	@RequestMapping(value="logout.action",method=RequestMethod.GET)
+	public String logout(HttpServletRequest request) {
+		try {
+			request.getSession().setAttribute("loginUser", null);
+			request.getSession().invalidate();
+			return "redirect:/login.html";
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errorMsg", "数据异常！");
+			return "error";
+		}
+	}
+	
+	
 }

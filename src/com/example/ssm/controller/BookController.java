@@ -1,8 +1,7 @@
 package com.example.ssm.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.example.ssm.entities.Book;
 import com.example.ssm.entities.User;
 import com.example.ssm.service.BookService;
+import com.example.ssm.util.PageList;
 
 @Controller
 @RequestMapping("book")
@@ -24,19 +24,26 @@ public class BookController {
 	@RequestMapping(value="{id}",method=RequestMethod.GET)
 	public String getBookById(@PathVariable("id") Integer id,HttpServletRequest request) {
 		request.setAttribute("book", bookService.getBookById(id));
-		return "book";
+		return "book/book";
 	}
 	
 	/**
-	 * »ñÈ¡×Ô¼ºµÄÍ¼Êé
-	 * ±ØÐëµÇÂ¼ÓÃ»§
-	 * 5Ìõ·ÖÒ³
+	 * ï¿½ï¿½È¡ï¿½Ô¼ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½Ã»ï¿½
+	 * 5ï¿½ï¿½ï¿½ï¿½Ò³
 	 */
-	@RequestMapping(value="books.action",method=RequestMethod.GET)
-	public String getAllMyBooks(HttpServletRequest request) {
-		List<Book> books = bookService.getAllMyBooks(((User)request.getSession().getAttribute("loginUser")).getId());
-		request.setAttribute("books", books);
-		return "books";
+	@RequestMapping(value="books/{pageNum}/{rowCount}.action",method=RequestMethod.GET)
+	public String getAllMyBooks(
+			@PathVariable("pageNum") int pageNum , 
+			@PathVariable("rowCount") int rowCount, 
+			HttpServletRequest request) 
+		{
+		PageList<Book> pageList = bookService.getAllBooks(((User)request.getSession().getAttribute("loginUser")).getId(),pageNum,rowCount);
+		request.setAttribute("pageList", pageList);
+		return "book/books";
 	}
+	
+	
+	
 	
 }

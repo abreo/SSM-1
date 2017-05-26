@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -80,7 +80,6 @@ h1 {
 	margin-left: 17.7%;
 }
 
-
 .list_li {
 	margin-top: 20px
 }
@@ -90,6 +89,7 @@ h1 {
 	color: #333;
 	vertical-align: middle;
 }
+
 .emm_text {
 	opacity: 0.5;
 	filter: alpha(opacity = 50);
@@ -109,29 +109,37 @@ h1 {
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<!-- navbar-inverse -->
-		<div class="container-fluid">
-			<div class="navbar-header" style="padding-left: 4%">
-				<!-- <img alt="Brand" src="#"> -->
+		<ul class="nav navbar-nav navbar-right" style="margin-right:5%">
+			<li>
 				<c:if test="${empty loginUser }">
-					<a class="navbar-brand" href="user/login.html">
-						<trans data-src="Sign In" data-dst="Sign In" style="background: transparent;">您还未登录</trans>
+					<a href="#" onclick="changeCenterGet('user/login.html')" role="button" data-toggle="modal"> 
+						<i class="icon-male-sign-alt icon-2x"></i>
+						<p>登录/注册</p>
 					</a>
 				</c:if>
 				<c:if test="${!empty loginUser }">
-					<a class="navbar-brand" href="#"><trans data-src="UserId" data-dst="UserId" style="background: transparent;font-size: 13px;">${loginUser.name }</trans></a>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" 
+							aria-haspopup="true" aria-expanded="false">${loginUser.name }
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li><a href="#">个人中心</a></li>
+							<li><a href="#" onclick="changeCenterGet('user/logout.action')">注销用户</a></li>
+						</ul>
+					</li>
 				</c:if>
-				
-			</div>
-		</div>
+			</li>
+		</ul>
 	</nav>
 
-	<div class="container-fluid page_body" >
+	<div class="container-fluid page_body">
 		<div class="row">
 			<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-faded sidebar">
 				<!--  col-md-2 d-none d-sm-block bg-faded sidebar -->
 				<ul class="nav nav-pills flex-column">
-					<li class="nav-item"><a class="nav-link active" href="#" onclick="changeCenterGet('book/books.action')">我的图书</a></li>
+					<li class="nav-item"><a class="nav-link active" href="#"
+						onclick="changeCenterGet('book/books/1/5.action')">我的图书</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">博客</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">新闻</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">论坛</a></li>
@@ -141,31 +149,32 @@ h1 {
 						id="redis_try_online">在线阅读</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">读书笔记</a></li>
 				</ul>
-				
+	
 				<ul class="nav nav-pills flex-column">
-					<li class="nav-item"><a class="nav-link" href="#" onclick="changeCenterGet('admin/users/0/5.action')">用户管理</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">图书管理</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"
+						onclick="changeCenterGet('admin/users/1/5.action')">用户管理</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"
+						onclick="changeCenterGet('admin/books/1/5.action')">图书管理</a></li>
 				</ul>
-				
+	
 				<ul class="nav nav-pills flex-column">
 					<li class="nav-item"><a class="nav-link" href="#">下载</a></li>
 				</ul>
 			</nav>
 
-			<main
-				class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 myself_main"
+			<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 myself_main"
 				role="main">
-			<div class="rankList clearfix" id="center">
+				<div class="rankList clearfix" id="center">
 				
-			</div>
+				</div>
 			</main>
 		</div>
 		<div class="row footer-bottom" style="margin-top: 50px">
-		<ul class="list-inline text-center">
-			<li><a href="http://www.miibeian.gov.cn/" target="_blank"></a></li>
-			<li>閱讀改變生活</li>
-		</ul>
-	</div>
+			<ul class="list-inline text-center">
+				<li><a href="http://www.miibeian.gov.cn/" target="_blank"></a></li>
+				<li>閱讀改變生活</li>
+			</ul>
+		</div>
 	</div>
 </body>
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>

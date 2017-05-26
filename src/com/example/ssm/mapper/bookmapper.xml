@@ -4,13 +4,56 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ssm.inter.BookMapper">
 
-    <select id="getAllMyBooks" resultMap="book_">
-        select * from book ,user_book ,author ,press where 
-        user_book.user_id = #{id} and 
-        book.book_id = user_book.book_id and
-        author.author_id = book.book_author and
-        press.press_id = book.book_press
-    </select>
+	<select id="getBooksCountByPointMsg" resultType="_int">
+		select count(book.book_id) from book, user_book,author,press where 
+		<if test="id != null">
+			user_book.user_id = #{id} and 
+			book.book_id = user_book.book_id and
+		</if>
+		author.author_id = book.book_author and
+		press.press_id   = book.book_press and
+		(
+		book_name like #{msg} or 
+		book_isbn like #{msg} or
+		author.author_name like #{msg}
+		)
+	</select>
+	
+	<!-- 关键字搜索 -->
+	<select id="getBooksByPointMsg" resultType="map">
+		select book.book_id bookId,book.book_name bookName from book, user_book,author,press where 
+		<if test="id != null">
+			user_book.user_id = #{id} and 
+			book.book_id = user_book.book_id and
+		</if>
+		author.author_id = book.book_author and
+		press.press_id   = book.book_press and
+		(
+		book_name like #{msg} or 
+		book_isbn like #{msg} or
+		author.author_name like #{msg}
+		)
+		limit #{pageNum} , #{rowCount}
+	</select>
+	
+	<select id="getBookCount" resultType="_int" parameterType="_int">
+		select count(book.book_id) from book
+		<if test="id != null">
+			,user_book where user_book.user_id = #{id} and book.book_id = user_book.book_id
+		</if>
+	</select>
+	
+	<!-- 获取全部书 -->
+	<select id="getAllBooks" resultMap="book_">
+		select * from book ,user_book ,author ,press where 
+		<if test="id != null">
+			user_book.user_id = #{id} and 
+			book.book_id = user_book.book_id and
+		</if>
+		author.author_id = book.book_author and
+		press.press_id   = book.book_press
+		limit #{pageNum} , #{rowCount}
+	</select>
     
 	<select id="getBookById" resultMap="book_">
 		SELECT * FROM book ,press ,author WHERE book_id = #{id} 
