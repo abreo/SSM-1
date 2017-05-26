@@ -35,7 +35,7 @@
 			</tbody>
 		</table>
 
-		<nav aria-label="Page navigation" style="margin-left: 300px">
+		<nav aria-label="Page navigation"  style="margin-left: 450px">
 		<ul class="pagination">
 			
 			<li>

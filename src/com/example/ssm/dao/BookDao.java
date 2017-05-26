@@ -31,12 +31,7 @@ public class BookDao {
 		return bookMapper.getBookCount(id);
 	}
 	
-	public Map<String,Object> getBooksByPointMsg(Map<String,Object> map) {
-		return bookMapper.getBooksByPointMsg(map);
+	public List<Map<String,Object>> getBooksByPointMsg(String msg) {
+		return bookMapper.getBooksByPointMsg(msg);
 	}
-	
-	public int getBooksCountByPointMsg(Map<String,Object> map) {
-		return bookMapper.getBooksCountByPointMsg(map);
-	}
-	
 }

@@ -169,10 +169,10 @@ h1 {
 				</div>
 			</main>
 		</div>
-		<div class="row footer-bottom" style="margin-top: 50px">
+		<div class="row footer-bottom" style="margin-top: 200p; margin-left:120px">
 			<ul class="list-inline text-center">
 				<li><a href="http://www.miibeian.gov.cn/" target="_blank"></a></li>
-				<li>閱讀改變生活</li>
+				<li>阅读改变生活</li>
 			</ul>
 		</div>
 	</div>

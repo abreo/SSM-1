@@ -26,14 +26,36 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
   
+   <!-- springmvc自帶編碼過濾器 ，僅對POST請求有效
+   		如果用GET請求，需要手動轉換編碼或者配置tomcat默認編碼方式：
+   		1. msg=new String(msg.getBytes("iso8859-1"),"UTF-8")
+   		2. http://blog.csdn.net/beauxie/article/details/53389856
+    -->
+   <filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+   
    <filter>  
-    <filter-name>permissionFilter</filter-name>  
-    <filter-class>com.example.ssm.filter.PermissionFilter</filter-class>  
-</filter>  
-<filter-mapping>  
-    <filter-name>permissionFilter</filter-name>  
-    <url-pattern>/*</url-pattern>  
-</filter-mapping> 
+	    <filter-name>permissionFilter</filter-name>  
+	    <filter-class>com.example.ssm.filter.PermissionFilter</filter-class>  
+	</filter>  
+	<filter-mapping>  
+	    <filter-name>permissionFilter</filter-name>  
+	    <url-pattern>/*</url-pattern>  
+	</filter-mapping> 
    
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

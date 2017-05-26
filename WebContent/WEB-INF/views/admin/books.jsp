@@ -64,7 +64,7 @@ margin-left:50px
       </tbody>
     </table>
     
-	<nav aria-label="Page navigation" style="margin-left: 300px">
+	<nav aria-label="Page navigation"  style="margin-left: 450px">
 		<ul class="pagination">
 			
 			<li>
@@ -123,37 +123,29 @@ margin-left:50px
 <script type="text/javascript">
 $("#searchBook").autocomplete({
     source: function(request, response) {
-		url = "/new_kpi/kpi/user/user/" + request.term;
-		args = {
-			"time" : new Date()
-		};
-		$.ajax({
-			url : "/new_kpi/kpi/user/user/" + request.term,
-			dataType : "json",
-			type : 'GET',
-			data : {
-				"time" : new Date()
-			},
-			success : function(data) {
-				response($.map(data.message, function(item) {
-					return {
-						id : item.id,
-						label : item.chineseName,
-						name : item.username,
-						email : item.email,
-						tel : item.tel
-					};
-				}));
-			}
-		});
+    	var url = "admin/books/" + request.term + ".json";
+    	var args = {
+    			"time" : new Date()
+    	}
+    	$.get(url,args,function(data) {
+    		data = eval("("+data+")");
+    		response($.map(data.message, function(item) {
+				return {
+					id : item.bookId,
+					label : item.bookName,
+					name : item.bookName
+				};
+			}));
+    	});
 	},
+	
 	select: function(event, ui){
 	    // 这里的this指向当前输入框的DOM元素
 	    // event参数是事件对象
 	    // ui对象只有一个item属性，对应数据源中被选中的对象
 	    $(this).value = ui.item.label;
-	    $("#bookId").val( ui.item.id );
-	    alert(ui.item.sayhello);
+	    $(this).val(ui.item.label);
+	    $("#bookId").val(ui.item.id );
 	    // 必须阻止事件的默认行为，否则autocomplete默认会把ui.item.value设为输入框的value值
 	    event.preventDefault();     
 	}

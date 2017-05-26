@@ -60,9 +60,8 @@ margin-left:50px
       </tbody>
     </table>
     
-	<nav aria-label="Page navigation" style="margin-left: 300px">
+	<nav aria-label="Page navigation" style="margin-left: 450px">
 		<ul class="pagination">
-			
 			<li>
 				<c:if test="${pageList.pageNum == 1}">
 					<a href="#" aria-label="Previous"> <span aria-hidden="true">&raquo;</span></a>
@@ -107,6 +106,9 @@ margin-left:50px
 				</c:if>
 				<c:if test="${pageList.pageNum < pageList.maxPage}">
 					<a href="#" onclick="changeCenterGet('book/books/${pageList.pageNum + 1 }/5.action')" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a>
+				</c:if>
+				<c:if test="${0 == pageList.maxPage}">
+					<a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a>
 				</c:if>
 			</li>
 		</ul>

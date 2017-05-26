@@ -51,17 +51,11 @@ public class BookService {
 	 * @param rowCount
 	 * @return
 	 */
-	public PageList<Book> getBookByPointMsg(@PathVariable("msg") String msg,int pageNum,int rowCount) {
+	public Map<String,Object> getBookByPointMsg(@PathVariable("msg") String msg) {
+		List<Map<String,Object>> maps = bookDao.getBooksByPointMsg("%"+msg+"%");
 		Map<String,Object> map = new HashMap<>();
-		map.put("msg", "%"+msg+"%");
-		map.put("pageNum", (pageNum-1)*rowCount);
-		map.put("rowCount", rowCount);
-		List<Book> books = bookDao.getBooksByPointMsg(map);
-		PageList<Book> pageList = new PageList<>();
-		pageList.setMaxCount(bookDao.getBooksCountByPointMsg(map));
-		pageList.setPageNum(pageNum);
-		pageList.setObjs(books);
-		return pageList;
+		map.put("message", maps);
+		return map;
 	}
 }
 

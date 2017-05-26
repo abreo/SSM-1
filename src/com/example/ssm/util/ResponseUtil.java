@@ -16,7 +16,7 @@ public class ResponseUtil {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		 
-		}
+	}
+	
+	public void get() {}
 }

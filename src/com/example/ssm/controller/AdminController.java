@@ -1,5 +1,9 @@
 package com.example.ssm.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,6 +18,9 @@ import com.example.ssm.entities.User;
 import com.example.ssm.service.BookService;
 import com.example.ssm.service.UserService;
 import com.example.ssm.util.PageList;
+import com.example.ssm.util.ResponseUtil;
+
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("admin")
@@ -47,11 +54,21 @@ public class AdminController {
 		return "admin/books";
 	}
 	
-	
-	@RequestMapping(value="books/{msg}/{pageNum}/{rowCount}.json",method=RequestMethod.POST)
-	public void getBookByPointMsg(
-			@PathVariable("msg") String msg,@PathVariable("pageNum") int pageNum,
-			@PathVariable("rowCount") int rowCount,HttpServletRequest request ,HttpServletResponse response) {
-		PageList<Book> pageList = bookService.getBookByPointMsg(msg, pageNum, rowCount);
+	/**
+	 * 關鍵字搜索書
+	 * @param msg
+	 * @param response
+	 */
+	@RequestMapping(value="books/{msg}.json",method=RequestMethod.GET)
+	public void getBookByPointMsg(@PathVariable("msg") String msg,HttpServletResponse response) {
+		try {
+			msg=new String(msg.getBytes("iso8859-1"),"UTF-8");
+			Map<String,Object> map = bookService.getBookByPointMsg(msg);
+			ResponseUtil.write(response, JSONObject.fromObject(map));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

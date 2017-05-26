@@ -15,8 +15,6 @@ public interface BookMapper {
 	
 	List<Book> getAllBooks(Map<String,Object> map);
 	
-	Map<String,Object> getBooksByPointMsg(Map<String,Object> map);
-	
-	int getBooksCountByPointMsg(Map<String,Object> map);
+	List<Map<String,Object>> getBooksByPointMsg(@Param("msg") String msg);
 	
 }
