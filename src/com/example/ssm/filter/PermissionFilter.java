@@ -40,13 +40,13 @@ public class PermissionFilter implements Filter {
 			arg2.doFilter(arg0, arg1);
 		} else {
 			User user = (User) request.getSession().getAttribute("loginUser");
-			if(null == user) { //µÇä›ÙYÔ´£¬µ«Î´µÇä›
+			if(null == user) { //ï¿½ï¿½ï¿½ï¿½YÔ´ï¿½ï¿½ï¿½ï¿½Î´ï¿½ï¿½ï¿½
 				request.getSession().setAttribute("LOGIN_TO_URL", url);
 				request.getRequestDispatcher("/login.html").forward(arg0, arg1);
 			} else {
 				Set<String> permissions = (Set<String>) request.getSession().getAttribute("PERMISSIONS");
 				if(permissions == null) {
-					//ÖØÐÂ²éÔƒ™àÏÞ
+					//ï¿½ï¿½ï¿½Â²ï¿½Ôƒï¿½ï¿½ï¿½ï¿½
 					reGetPermission(user, request);
 				} 
 				if(hasPermission(url, permissions)) {
@@ -99,7 +99,5 @@ public class PermissionFilter implements Filter {
 			request.getSession().setAttribute("PERMISSIONS", urls);
 		}
 	}
-	
-    
 	
 }

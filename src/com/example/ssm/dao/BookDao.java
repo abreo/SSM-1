@@ -34,4 +34,8 @@ public class BookDao {
 	public List<Map<String,Object>> getBooksByPointMsg(String msg) {
 		return bookMapper.getBooksByPointMsg(msg);
 	}
+	
+	public void addBook(Book book) {
+		bookMapper.addBook(book);
+	}
 }

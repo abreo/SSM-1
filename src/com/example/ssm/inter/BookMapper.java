@@ -17,4 +17,5 @@ public interface BookMapper {
 	
 	List<Map<String,Object>> getBooksByPointMsg(@Param("msg") String msg);
 	
+	void addBook(Book book);
 }

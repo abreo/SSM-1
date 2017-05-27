@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-label .blog_img {
+/* label .blog_img {
     display: inline-block;
     vertical-align: middle;
     width: 40px;
@@ -18,15 +18,16 @@ label .blog_img {
 }
 .book_span {
 margin-left:50px
-}
+} */
 </style>
 </head>
 <body>
-<h3>我的图书</h3>
-<br/><br/><br/>
+<h3>图书管理</h3>
+<br/><br/>
 <input type="text" id="searchBook"/>
-<input type="text" id="bookId" type="hidden" />
-<br/>
+<input type="text" id="bookId" type="hidden" style="display:none" />
+<input type="button" id="addBook" value="添加"/>
+<br/><br/><br/>
 <div class="bs-example bs-example-type table-responsive" data-example-id="simple-headings">
     <table class="table">
       <caption>所有图书列表.</caption>
@@ -149,6 +150,9 @@ $("#searchBook").autocomplete({
 	    // 必须阻止事件的默认行为，否则autocomplete默认会把ui.item.value设为输入框的value值
 	    event.preventDefault();     
 	}
+});
+$("#addBook").click(function() {
+	changeCenterGet("admin/book/add.html");
 });
 </script>
 </html>

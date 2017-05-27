@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ssm.inter.BookMapper">
 	
+	<!-- 添加图书 -->
+	<insert id="addBook">
+		insert into book 
+		(book_name,book_isbn,book_price,book_press,publish_date,print_date,book_version,book_author,book_image_path,book_msg)
+		values (#{name},#{isbn},#{price},#{press},#{publishDate},#{printDate},#{version},#{author},#{image},#{msg})	
+	</insert>
+	
 	<!-- 关键字搜索 -->
 	<select id="getBooksByPointMsg" resultType="map">
 		select book.book_id bookId,book.book_name bookName from book,author,press where 
@@ -25,10 +32,14 @@
 	
 	<!-- 获取全部书 -->
 	<select id="getAllBooks" resultMap="book_">
-		select * from book ,user_book ,author ,press where 
+		select * from author,press,book
 		<if test="id != null">
-			user_book.user_id = #{id} and 
-			book.book_id = user_book.book_id and
+			left join user_book on 
+			book.book_id = user_book.book_id 
+			where user_book.user_id = #{id} and
+		</if>
+		<if test="id == null">
+			where
 		</if>
 		author.author_id = book.book_author and
 		press.press_id   = book.book_press

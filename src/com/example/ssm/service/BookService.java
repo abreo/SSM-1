@@ -57,5 +57,9 @@ public class BookService {
 		map.put("message", maps);
 		return map;
 	}
+	
+	public void addBook(Book book) {
+		bookDao.addBook(book);
+	}
 }
 

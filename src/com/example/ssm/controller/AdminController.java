@@ -1,7 +1,6 @@
 package com.example.ssm.controller;
 
-import java.io.UnsupportedEncodingException;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -10,8 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ssm.entities.Book;
 import com.example.ssm.entities.User;
@@ -54,21 +56,37 @@ public class AdminController {
 		return "admin/books";
 	}
 	
+	
 	/**
-	 * 關鍵字搜索書
+	 * 关键字搜索书
 	 * @param msg
 	 * @param response
 	 */
 	@RequestMapping(value="books/{msg}.json",method=RequestMethod.GET)
 	public void getBookByPointMsg(@PathVariable("msg") String msg,HttpServletResponse response) {
+		Map<String,Object> map = bookService.getBookByPointMsg(msg);
+		ResponseUtil.write(response, JSONObject.fromObject(map));
+	}
+	
+	@RequestMapping(value="book/add.html",method=RequestMethod.GET)
+	public String toAddBookPage() {
+		return "admin/add";
+	}
+	
+	/**
+	 * 添加图书
+	 * @param book
+	 * @param response
+	 */
+	@RequestMapping(value="book/add.action",method=RequestMethod.POST)
+	public void addBook(@RequestBody Book book,HttpServletResponse response) {
 		try {
-			msg=new String(msg.getBytes("iso8859-1"),"UTF-8");
-			Map<String,Object> map = bookService.getBookByPointMsg(msg);
-			ResponseUtil.write(response, JSONObject.fromObject(map));
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			bookService.addBook(book);
+			ResponseUtil.write(response, "SUCCESS");
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+		ResponseUtil.write(response, "ERROR");
 	}
+	
 }
