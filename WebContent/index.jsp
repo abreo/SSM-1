@@ -110,6 +110,7 @@ h1 {
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<ul class="nav navbar-nav navbar-right" style="margin-right:5%">
+			
 			<li>
 				<c:if test="${empty loginUser }">
 					<a href="#" onclick="changeCenterGet('user/login.html')" role="button" data-toggle="modal"> 

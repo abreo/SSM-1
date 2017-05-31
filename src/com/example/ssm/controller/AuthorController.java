@@ -1,5 +1,6 @@
 package com.example.ssm.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,8 +25,14 @@ public class AuthorController {
 
 	@RequestMapping(value="authors/{msg}.json",method=RequestMethod.GET)
 	public void getAuthorByPointMsg(@PathVariable("msg") String msg,HttpServletResponse response) {
-		Map<String,Object> map = authorService.getAuthorByPointMsg(msg);
-		ResponseUtil.write(response, JSONObject.fromObject(map));
+		try {
+			msg=new String(msg.getBytes("iso8859-1"),"UTF-8");
+			Map<String,Object> map = authorService.getAuthorByPointMsg(msg);
+			ResponseUtil.write(response, JSONObject.fromObject(map));
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
