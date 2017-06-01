@@ -182,5 +182,15 @@ h1 {
 <script type="text/javascript"
 	src="bootstrap/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/public/public.js"></script>
+<script type="text/javascript">
+/* 检测是否有待跳转的页面 */
+var url = "public/page.html";
+var args = {"time":new Date()}
+$.get(url,args,function(data) {
+	if(data != 1) {
+		changeCenterGet(data);
+	}
+});
+</script>
 </html>
 

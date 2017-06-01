@@ -80,6 +80,7 @@ margin-bottom:20px;
 <script type="text/javascript" src="js/public/public.js"></script>
 <script type="text/javascript">
 $(function() {
+	
 	$("#submit").click(function() {
 		var url="user/login.action"
 		var username = $("#username").val();
@@ -89,10 +90,10 @@ $(function() {
 				"password":password
 		}
 		$.post(url,args,function(data) {
-			if(data == 1) {
-				window.location.href="/SSM/index.jsp"
-			} else {
+			if(data == 0) {
 				changeCenterGet("/SSM/login.html");
+			} else if(data == 1) {
+				window.location.href="index.jsp";
 			}
 		});
 	});

@@ -24,10 +24,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	private static final int SUCCESS = 1;
-	
-	private static final int ERROR = 0;
-	
 	@RequestMapping(value="login.html",method=RequestMethod.GET)
 	public String loginPage() {
 		return "redirect:/login.html";
@@ -38,6 +34,7 @@ public class UserController {
 			String username,String password,
 			HttpServletRequest request,HttpServletResponse response
 		) {
+		String aimUrl = "";
 		User user = userService.login(username, password);
 		if(user != null) {
 			Set<String> urls = new HashSet<>();
@@ -54,10 +51,10 @@ public class UserController {
 			}
 			request.getSession().setAttribute("PERMISSIONS", urls);
 			request.getSession().setAttribute("loginUser", user);
+			ResponseUtil.write(response, 1);
 		} else {
-			ResponseUtil.write(response, ERROR);
+			ResponseUtil.write(response, 0);
 		}
-		ResponseUtil.write(response, SUCCESS);
 	}
 	
 	@RequestMapping(value="logout.action",method=RequestMethod.GET)

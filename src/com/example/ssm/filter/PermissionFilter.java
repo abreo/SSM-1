@@ -19,15 +19,21 @@ import com.example.ssm.entities.User;
 public class PermissionFilter implements Filter {
 
 	private static final String[] ALLOW_REQUEST = {
-			"login.html","index.html","register.html",
-			"login.action","index.action","register.action",
-			".js",".css",".png",".jpg"
+			".js",
+			".css",
+			".png",
+			".jpg",
+			"login.html",
+			"index.html",
+			"login.action",
+			"index.action",
+			"register.html",
+			"register.action",
 	} ;
 	
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
@@ -36,14 +42,15 @@ public class PermissionFilter implements Filter {
 		// TODO Auto-generated method stub
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		String url = request.getRequestURI().toString();
-		if(notNeedLogin(url, request)) {
+		if(notNeedLogin(url, request)) { //不需要登录的URI
 			arg2.doFilter(arg0, arg1);
-		} else {
+		} else {  //需要登录的URI
 			User user = (User) request.getSession().getAttribute("loginUser");
 			if(null == user) { //����YԴ����δ���
 				request.getSession().setAttribute("LOGIN_TO_URL", url);
 				request.getRequestDispatcher("/login.html").forward(arg0, arg1);
 			} else {
+				@SuppressWarnings("unchecked")
 				Set<String> permissions = (Set<String>) request.getSession().getAttribute("PERMISSIONS");
 				if(permissions == null) {
 					//���²�ԃ����
