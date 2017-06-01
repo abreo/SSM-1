@@ -48,7 +48,7 @@
     
 	<select id="getBookById" resultMap="book_">
 		SELECT * FROM book ,press ,author WHERE book_id = #{id} 
-        AND book_id = press_id AND book_id = author_id
+        AND book_press = press_id AND book_author = author_id
 	</select>
 	
 	<resultMap type="com.example.ssm.entities.Book" id="book_">

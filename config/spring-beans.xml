@@ -20,9 +20,9 @@
 	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${jdbc.driverClass}"></property>
-		<property name="jdbcUrl" value="${jdbc.home_jdbcUrl}"></property>
+		<property name="jdbcUrl" value="${jdbc.office_jdbcUrl}"></property>
 		<property name="user" value="${jdbc.user}"></property>
-		<property name="password" value="${jdbc.home_password}"></property>
+		<property name="password" value="${jdbc.office_password}"></property>
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

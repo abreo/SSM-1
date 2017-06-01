@@ -28,7 +28,7 @@ margin-left:50px
 <input type="text" id="bookId" type="hidden" style="display:none" />
 <input type="button" id="addBook" value="添加"/>
 <br/><br/><br/>
-<div class="bs-example bs-example-type table-responsive" data-example-id="simple-headings">
+<div class="bs-example bs-example-type table-responsive" data-example-id="simple-headings" id="books_list">
     <table class="table">
       <caption>所有图书列表.</caption>
       <thead>
@@ -139,7 +139,6 @@ $("#searchBook").autocomplete({
 			}));
     	});
 	},
-	
 	select: function(event, ui){
 	    // 这里的this指向当前输入框的DOM元素
 	    // event参数是事件对象
@@ -147,8 +146,15 @@ $("#searchBook").autocomplete({
 	    $(this).value = ui.item.label;
 	    $(this).val(ui.item.label);
 	    $("#bookId").val(ui.item.id );
+	    
 	    // 必须阻止事件的默认行为，否则autocomplete默认会把ui.item.value设为输入框的value值
 	    event.preventDefault();     
+	    var args = {
+				"time" : new Date()
+	    	    }
+	    $.get("admin/book/"+ui.item.id+".action",args,function(data) {
+	    	$("#books_list").html(data);
+		})
 	}
 });
 $("#addBook").click(function() {

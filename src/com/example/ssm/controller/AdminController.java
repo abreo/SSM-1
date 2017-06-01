@@ -1,6 +1,5 @@
 package com.example.ssm.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.ssm.entities.Book;
 import com.example.ssm.entities.User;
@@ -34,6 +31,13 @@ public class AdminController {
 	@Autowired
 	private BookService bookService;
 	
+	/**
+	 * 所有用户分页列表
+	 * @param pageNum
+	 * @param pageCount
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="users/{pageNum}/{pageCount}.action",method=RequestMethod.GET)
 	public String getAllUsers(
 			@PathVariable("pageNum") int pageNum,
@@ -45,6 +49,9 @@ public class AdminController {
 		return "admin/users";
 	}
 	
+	/**
+	 * 所有图书分页列表
+	 */
 	@RequestMapping(value="books/{pageNum}/{rowCount}.action",method=RequestMethod.GET)
 	public String getAllBooks(
 			@PathVariable("pageNum") int pageNum,
@@ -66,6 +73,17 @@ public class AdminController {
 	public void getBookByPointMsg(@PathVariable("msg") String msg,HttpServletResponse response) {
 		Map<String,Object> map = bookService.getBookByPointMsg(msg);
 		ResponseUtil.write(response, JSONObject.fromObject(map));
+	}
+	
+	/**
+	 * ID搜索图书信息
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="book/{id}.action",method=RequestMethod.GET)
+	public void getBookById(@PathVariable("id") Integer id,HttpServletResponse response) {
+		String result = bookService.findBookById(id);
+		ResponseUtil.write(response, result);
 	}
 	
 	@RequestMapping(value="book/add.html",method=RequestMethod.GET)
