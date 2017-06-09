@@ -18,18 +18,20 @@ import com.example.ssm.entities.User;
 
 public class PermissionFilter implements Filter {
 
-	private static final String[] ALLOW_REQUEST = {
-			".js",
-			".css",
-			".png",
-			".jpg",
-			"login.html",
-			"index.html",
-			"login.action",
-			"index.action",
-			"register.html",
-			"register.action",
-	} ;
+//	private static final String[] ALLOW_REQUEST = {
+//			".js",
+//			".css",
+//			".png",
+//			".jpg",
+//			"login.html",
+//			"index.html",
+//			"login.action",
+//			"index.action",
+//			"register.html",
+//			"register.action",
+//	} ;
+	
+	private static String[] ALLOW_REQUEST = null;
 	
 	@Override
 	public void destroy() {
@@ -39,6 +41,7 @@ public class PermissionFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain arg2)
 			throws IOException, ServletException {
+//		filterConfig.getInitParameter("encoding")
 		// TODO Auto-generated method stub
 		HttpServletRequest request = (HttpServletRequest) arg0;
 		String url = request.getRequestURI().toString();
@@ -66,9 +69,10 @@ public class PermissionFilter implements Filter {
 	}
 
 	@Override
-	public void init(FilterConfig arg0) throws ServletException {
+	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
-		
+		String param = filterConfig.getInitParameter("ALLOW_REQUEST");
+		ALLOW_REQUEST = param.split("-");
 	}
 	
 	private boolean notNeedLogin(String toUrl,HttpServletRequest request) {

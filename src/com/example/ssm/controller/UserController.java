@@ -34,7 +34,6 @@ public class UserController {
 			String username,String password,
 			HttpServletRequest request,HttpServletResponse response
 		) {
-		String aimUrl = "";
 		User user = userService.login(username, password);
 		if(user != null) {
 			Set<String> urls = new HashSet<>();

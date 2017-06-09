@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.ssm.inter.BlogMapper">
+	
+	<select id="getBlogsByPage" resultMap="List_blogs_">
+		select blog.* ,user.headImageUrl from blog ,user where blog.blog_writer = user.user_id order by blog_pv limit #{pageNum} ,#{pageCount}
+	</select>
+	
+	<!-- 博客列表，只显示部分信息 -->
+	<resultMap type="com.example.ssm.entities.Blog" id="List_blogs_">
+		<id column="blog_id" property="id" />
+		<result column="blog_create_time" property="createTime"/>
+		<result column="blog_pv" property="PV"/>
+		<result column="blog_title" property="title" />
+		<association property="writer" javaType="com.example.ssm.entities.User">
+			<result column="head_image" property="headImageUrl" />
+		</association>
+	</resultMap>
+	
+</mapper>

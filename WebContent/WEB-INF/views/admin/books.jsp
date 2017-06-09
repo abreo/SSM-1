@@ -1,27 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-/* label .blog_img {
-    display: inline-block;
-    vertical-align: middle;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: solid 1px #dae4ea;
-    margin-right: 10px;
-}
-.book_span {
-margin-left:50px
-} */
-</style>
-</head>
-<body>
 <h3>图书管理</h3>
 <br/><br/>
 <input type="text" id="searchBook"/>
@@ -119,7 +98,6 @@ margin-left:50px
 
 </div>
 
-</body>
 <script type="text/javascript" src="jqueryui/jquery-ui.min.js"></script>
 <script type="text/javascript">
 $("#searchBook").autocomplete({
@@ -161,4 +139,3 @@ $("#addBook").click(function() {
 	changeCenterGet("admin/book/add.html");
 });
 </script>
-</html>

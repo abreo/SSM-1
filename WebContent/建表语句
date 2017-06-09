@@ -58,3 +58,48 @@ ur_role_id integer ,
 constraint foreign key (ur_user_id) references user(user_id) ,
 constraint foreign key (ur_role_id) references role(role_id) 
 );
+
+
+create table tag (
+tag_id integer primary key auto_increment ,
+tag_name varchar(255) ,
+parent_tag integer,
+constraint foreign key (parent_tag) references tag(tag_id) 
+)
+
+create table message (
+msg_id integer primary key auto_increment ,
+msg_msg varchar(255) ,
+msg_writer integer ,
+msg_blog integer ,
+constraint foreign key (msg_blog) references blog(blog_id) ,
+constraint foreign key (msg_writer) references user(user_id) 
+)
+
+
+create table blog (
+blog_id integer primary key auto_increment ,
+blog_url varchar(255) ,
+blog_pv long,
+blog_create_time datetime ,
+blog_title varchar(255),
+blog_content text,
+blog_type varchar(45),
+blog_writer integer ,
+blog_content_type integer ,
+constraint foreign key(blog_writer) references user(user_id) ,
+constraint foreign key(blog_content_type) references type(type_id) 
+)
+
+create table tag_blog(
+tag_blog_id integer primary key auto_increment ,
+tag_blog_tag_id integer ,
+tag_blog_blog_id integer ,
+constraint foreign key (tag_blog_tag_id) references tag(tag_id) ,
+constraint foreign key (tag_blog_blog_id) references blog(blog_id) 
+)
+
+create table type (
+id integer primary key auto_increment ,
+name varchar(255)
+)

@@ -10,102 +10,8 @@
 <meta name="description" content="">
 <meta name="author" content="Json">
 <title>图书管理系统</title>
-<link href="bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<style type="text/css">
-/* Move down content because we have a fixed navbar that is 3.5rem tall */
-body {
-	padding-top: 3.5rem;
-}
-
-h1 {
-	margin-bottom: 20px;
-	padding-bottom: 9px;
-	border-bottom: 1px solid #eee;
-}
-
-.sidebar {
-	position: fixed;
-	top: 51px;
-	bottom: 0;
-	left: 0;
-	z-index: 1000;
-	padding: 20px;
-	overflow-x: hidden;
-	overflow-y: auto;
-	/* Scrollable contents if viewport is shorter than content. */
-	border-right: 1px solid #eee;
-}
-
-.sidebar {
-	padding-left: 0;
-	padding-right: 0;
-}
-
-.sidebar .nav {
-	margin-bottom: 20px;
-}
-
-.sidebar .nav-item {
-	width: 100%;
-}
-
-.sidebar .nav-item+.nav-item {
-	margin-left: 0;
-}
-
-.sidebar .nav-link {
-	border-radius: 0;
-}
-
-.placeholders {
-	padding-bottom: 3rem;
-}
-
-.placeholder img {
-	padding-top: 1.5rem;
-	padding-bottom: 1.5rem;
-}
-
-.redback {
-	background: #CC0000
-}
-
-.navtext {
-	font-size: 22px
-}
-
-.myself_main {
-	margin-top: 5px;
-	margin-left: 17.7%;
-}
-
-.list_li {
-	margin-top: 20px
-}
-
-.record_text {
-	font-weight: normal;
-	color: #333;
-	vertical-align: middle;
-}
-
-.emm_text {
-	opacity: 0.5;
-	filter: alpha(opacity = 50);
-	display: inline-block;
-	border-radius: 50%;
-	background: #b8b8b8;
-	width: 25px;
-	height: 25px;
-	font-size: 16px;
-	color: black;
-	text-align: center;
-	line-height: 25px;
-	margin-right: 5px;
-	vertical-align: middle;
-}
-</style>
+<link href="bootstrap/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/index.css" rel="stylesheet">
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -136,12 +42,12 @@ h1 {
 
 	<div class="container-fluid page_body">
 		<div class="row">
-			<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-faded sidebar">
-				<!--  col-md-2 d-none d-sm-block bg-faded sidebar -->
+			<nav class="col-md-2 col-sm-3 d-none d-sm-block bg-faded sidebar">
 				<ul class="nav nav-pills flex-column">
 					<li class="nav-item"><a class="nav-link active" href="#"
 						onclick="changeCenterGet('book/books/1/5.action')">我的图书</a></li>
-					<li class="nav-item"><a class="nav-link" href="#">博客</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"
+						onclick="changeCenterGet('blog/blogs/1/5.action')">博客</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">新闻</a></li>
 					<li class="nav-item"><a class="nav-link" href="#">论坛</a></li>
 				</ul>
@@ -163,12 +69,11 @@ h1 {
 				</ul>
 			</nav>
 
-			<main class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3 myself_main"
-				role="main">
+			<div class=" col-md-10 col-sm-9 offset-md-2 offset-sm-3 myself_main">
 				<div class="rankList clearfix" id="center">
 				
 				</div>
-			</main>
+			</div>
 		</div>
 		<div class="row footer-bottom" style="margin-top: 200p; margin-left:120px">
 			<ul class="list-inline text-center">

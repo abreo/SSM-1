@@ -19,6 +19,16 @@ public class User {
 	
 	private String email;
 	
+	private String headImageUrl;
+	
+
+	public String getHeadImageUrl() {
+		return headImageUrl;
+	}
+
+	public void setHeadImageUrl(String headImageUrl) {
+		this.headImageUrl = headImageUrl;
+	}
 
 	public String getEmail() {
 		return email;
