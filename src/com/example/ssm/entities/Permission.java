@@ -1,6 +1,13 @@
 package com.example.ssm.entities;
 
-public class Permission {
+import java.io.Serializable;
+
+public class Permission implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	

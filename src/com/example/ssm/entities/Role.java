@@ -1,8 +1,14 @@
 package com.example.ssm.entities;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class Role {
+public class Role implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	

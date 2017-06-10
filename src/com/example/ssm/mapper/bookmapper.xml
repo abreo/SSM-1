@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ssm.inter.BookMapper">
-	
+    <cache type="com.example.ssm.cache.RedisCache"></cache>
 	<!-- 添加图书 -->
 	<insert id="addBook">
 		insert into book 

@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.ssm.inter.BlogMapper">
-	
+    <cache type="com.example.ssm.cache.RedisCache"></cache>
 	<select id="getBlogsByPage" resultMap="List_blogs_">
-		select blog.* ,user.headImageUrl from blog ,user where blog.blog_writer = user.user_id order by blog_pv limit #{pageNum} ,#{pageCount}
+		select blog.* ,user.head_image from blog ,user where blog.blog_writer = user.user_id order by blog_pv limit #{pageNum} ,#{pageCount}
 	</select>
 	
 	<!-- 博客列表，只显示部分信息 -->

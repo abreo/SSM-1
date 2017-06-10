@@ -1,9 +1,15 @@
 package com.example.ssm.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-public class Blog {
+public class Blog  implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	

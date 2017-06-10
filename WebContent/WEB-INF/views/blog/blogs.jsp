@@ -2,15 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <style type="text/css"> 
-.author_head_image {
-    display: block;
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 5px;
-    border-radius: 50%;
+.center-vertical {
+vertical-align:middle
 }
 </style>
-<nav class="navbar navbar-default" style="margin-right:4%" role="navigation">
+<nav class="navbar navbar-default" style="margin-right:4%;margin-top:2%" role="navigation">
     <div class="container-fluid">
     <div>
         <ul class="nav navbar-nav">
@@ -53,17 +49,17 @@
       <tbody>
       	<c:forEach items="${pageList.objs }" var="blog" varStatus="status">
       		<tr>
-      			<td scope="row">${ status.index + 1}</td>
-      			<td>
-      				<img src="${blog.writer.headImageUrl }" alt="img" class="blog_img">
+      			<td style="vertical-align:middle" scope="row">${ status.index + 1}</td>
+      			<td style="vertical-align:middle">
+      				<img class="author_head_image" src="${blog.writer.headImageUrl }" alt="img" class="blog_img">
       			</td>
-      			<td>
-      				<a href="#" class="">《${blog.title}》</a>
+      			<td style="vertical-align:middle">
+      				<a  href="#" class="">《${blog.title}》</a>
       			</td>
-      			<td>
+      			<td style="vertical-align:middle">
       				${blog.createTime}
       			</td>
-      			<td>
+      			<td style="vertical-align:middle">
       				<b class="blog_b_margin">${blog.PV}</b>
       			</td>
       		</tr>

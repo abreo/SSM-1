@@ -15,8 +15,15 @@
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<ul class="nav navbar-nav navbar-right" style="margin-right:5%">
-			
+		<ul class="nav navbar-nav navbar-right" style="margin-right:5%;">
+			<li style="margin-top:5px;margin-bottom:5px;vertical-align:middle;width:35px;height:30px">
+				<c:if test="${empty loginUser }">
+					<img class="author_head_image" src="image/head/default_48.jpg" alt="img" class="blog_img">
+				</c:if>
+				<c:if test="${!empty loginUser }">
+					<img class="author_head_image" src="${loginUser.headImageUrl }" alt="img" class="blog_img">
+				</c:if>
+			</li>
 			<li>
 				<c:if test="${empty loginUser }">
 					<a href="#" onclick="changeCenterGet('user/login.html')" role="button" data-toggle="modal"> 
