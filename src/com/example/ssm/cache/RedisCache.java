@@ -7,7 +7,10 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.apache.ibatis.cache.Cache;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 
+import com.example.ssm.entities.User;
 import com.example.ssm.util.SerializeUtil;
 
 import redis.clients.jedis.Jedis;
@@ -66,7 +69,8 @@ public class RedisCache implements Cache {
 		Jedis jedis = null;
 		try {
 			jedis = pool.getResource();
-			byte[] data = jedis.get(SerializeUtil.serialize(key));
+			byte[] result = SerializeUtil.serialize(key);
+			byte[] data = jedis.get(result);
 			if (data == null || data.length <= 0) {
 				return null;
 			}

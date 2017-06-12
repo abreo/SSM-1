@@ -16,14 +16,17 @@
 		
     <context:property-placeholder location="classpath:redis.properties"/>
     
+    <!-- Redis缓存 -->
+    
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig"> 
 	    <!-- 控制一个pool最多有多少个状态为idle(空闲的)的jedis实例 --> 
-        <property name="maxIdle" value="200" />  
-        <property name="maxTotal" value="300" />  
+        <!-- <property name="maxIdle" value="8" />   -->
+        <!-- 最大分配的对象数  -->
+        <!-- <property name="maxTotal" value="6" />  --> 
         <!-- 表示当borrow(引入)一个jedis实例时，最大的等待时间，如果超过等待时间，则直接抛出JedisConnectionException；。 -->
-        <property name="maxWaitMillis" value="30000" />  
+        <!-- <property name="maxWaitMillis" value="30000" />   -->
         <!-- 在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的； -->
-        <property name="testOnBorrow" value="true" />  
+        <!-- <property name="testOnBorrow" value="true" />   -->
     </bean>
     
 	<bean id="jedisPool" class="redis.clients.jedis.JedisPool">
@@ -34,11 +37,34 @@
 		    <value>192.168.45.128</value>
 		</constructor-arg>
 		<constructor-arg index="2" type="int">
-		    <value>6379</value>
+		    <value>6378</value>
 		</constructor-arg>
 		<constructor-arg index="3" type="int">
 		    <value>100000</value>
 		</constructor-arg>	    
 	</bean>
 	
+	<!-- Redis数据库 -->
+	<!-- jedis 配置-->  
+    <bean id="clusterPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >  
+        <!--最大空闲数-->  
+        <property name="maxIdle" value="100" />  
+        <!--最大建立连接等待时间-->  
+        <property name="maxWaitMillis" value="30000" />  
+        <!--是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个-->  
+        <property name="testOnBorrow" value="true" />  
+        <property name="maxTotal" value="1000" />  
+        <property name="minIdle" value="8" />  
+    </bean > 
+    
+    <bean id="jedisCluster"  class="com.example.ssm.factory.JedisClusterFactory" >  
+        <property name="addressConfig">  
+            <value>classpath:rediscluster.properties</value>  
+        </property>  
+        <!--  属性文件里  key的前缀 -->
+        <property name="addressKeyPrefix" value="cluster" />     
+        <property name="timeout" value="300000" />  
+        <property name="maxRedirections" value="100" />  
+        <property name="genericObjectPoolConfig" ref="poolConfig" />  
+    </bean > 
 </beans>

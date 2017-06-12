@@ -34,7 +34,10 @@ public class UserController {
 			String username,String password,
 			HttpServletRequest request,HttpServletResponse response
 		) {
-		
+//		GenericObjectPoolConfig config = new GenericObjectPoolConfig();
+//		JedisPool pool = new JedisPool(config,"192.168.45.128",6379);
+//		Jedis jedis = pool.getResource();
+//		System.out.println(jedis.toString());
 		User user = userService.login(username, password);
 		if(user != null) {
 			Set<String> urls = new HashSet<>();

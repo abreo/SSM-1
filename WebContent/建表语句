@@ -100,6 +100,6 @@ constraint foreign key (tag_blog_blog_id) references blog(blog_id)
 )
 
 create table type (
-id integer primary key auto_increment ,
-name varchar(255)
+type_id integer primary key auto_increment ,
+type_name varchar(255)
 )

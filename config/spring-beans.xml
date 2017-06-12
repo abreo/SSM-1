@@ -19,10 +19,18 @@
 	</context:component-scan>
 	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		
 		<property name="driverClass" value="${jdbc.driverClass}"></property>
 		<property name="jdbcUrl" value="${jdbc.home_jdbcUrl}"></property>
 		<property name="user" value="${jdbc.user}"></property>
 		<property name="password" value="${jdbc.home_password}"></property>
+		
+		 <!-- 
+		 <property name="driverClass" value="${dm.driverClass}"></property>
+		 <property name="jdbcUrl" value="${dm.jdbcUrl}"></property>
+		 <property name="user" value="${dm.user}"></property>
+		 <property name="password" value="${dm.password}"></property>
+		  -->
 	</bean>
 
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

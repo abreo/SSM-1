@@ -54,12 +54,12 @@ vertical-align:middle
       				<img class="author_head_image" src="${blog.writer.headImageUrl }" alt="img" class="blog_img">
       			</td>
       			<td style="vertical-align:middle">
-      				<a  href="#" class="">《${blog.title}》</a>
+      				<a  href="#" onclick="incrementHints('blog/blog/${blog.id }.action',$(this))" class="">《${blog.title}》</a>
       			</td>
       			<td style="vertical-align:middle">
       				${blog.createTime}
       			</td>
-      			<td style="vertical-align:middle">
+      			<td style="vertical-align:middle" id="pv_${ status.index + 1}">
       				<b class="blog_b_margin">${blog.PV}</b>
       			</td>
       		</tr>
@@ -120,3 +120,18 @@ vertical-align:middle
 		</ul>
 		</nav>
 </div>
+<script type="text/javascript">
+function incrementHints(url,a) {
+	var args = {
+			"time" : new Date()
+	}
+	$.get(url,args,function(data) {
+		if(data != 0) {
+			var b = a.parent();
+			var c = b.next("td").next("td");
+			var d = c.children(":first")
+			d.html(data);
+		}
+	});
+}
+</script>
